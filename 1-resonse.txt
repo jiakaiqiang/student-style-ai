@@ -1,0 +1,64 @@
+1.代码的含义是  将我正在学习python 写入 learning.txt 文件中
+with open 是文件操作的规定写法 表示 文件操作完成后自动关闭
+w 则是写入的意思
+encoding="ftf-8" 则是写入的字符编码
+file.write() 则是执行写入的操作
+
+2. r 是读 w 是写 带有写入覆盖的意思 a 则是文件追加
+3.  json.dumps():将python对象转成json字符串
+  json.loads():将json字符串 转成python对象
+  json.dump(): 将python对象写入json文件 
+  json.load():将json文件读成python对象
+
+4.json.dump(record, file, ensure_ascii=False, indent=2) 这一行则是将record python对象写入file文件 文件中的中文不转义 整体缩进两个字符
+5.Path("data") 是创建data文件夹
+  mkdir(exist_ok=True) 如果data文件夹存在则不报错
+  data_dir / "stage_02_record.json" 指定目录文件夹
+6.如果文件存在则读取出文件的内容 不存在着报文件不存在  因为agent 开发中需要使用异常进行兜底 保证程序可正常运行 然后将异常信息抛出 便于开发者调试和排查
+7.agent开发过程中都是工具的调用 这种写法 有利于模块功能点分离重组 和复用 在模型使用工具调用的时候这样更加的清晰和轻量
+8.requests.get() 发送get请求
+  response.status_code  获取相应的状态吗
+  response.json()  获取请求回来的数据 把json解析成python 对象
+  它和前端 fetch 有什么相似点？  类似于前端的fetch("/api/search?q=python")
+9.表示将python dict 作为jsons实例发送  类似于前端的 fetch('https://httpbin.org/post',{
+   body:JSON.stringify(payload)
+})
+10.避免密钥泄露 代码可以安全提交 
+import  os
+api_key=os.getenv('xxxxx')
+
+11.  import json
+  from pathlib import Path
+
+
+  def save_record(record, file_path):
+      with open(file_path, 'w', encoding='utf-8') as f:
+          json.dump(record, f, ensure_ascii=False, indent=4)
+
+
+  def load_record(file_path):
+      with open(file_path, 'r', encoding='utf-8') as f:
+          return json.load(f)
+
+
+  def main():
+      learning_record = {
+          "name": "你的名字",
+          "role": "frontend developer",
+          "target": "Agent developer",
+          "completed": False,
+          "stage":"Python 阶段 2",
+          "topics": ["变量", "函数", "JSON"]
+      }
+
+      data_dir = Path("data")
+      data_dir.mkdir(exist_ok=True)
+      file_path = data_dir / "stage_02_record.json"
+
+      save_record(learning_record, file_path)
+      loaded_record = load_record(file_path)
+    print(f"当前阶段：{loaded_record['stage']}")
+        print(f"学习目标：{loaded_record['target']}")
+
+
+  main()
