@@ -54,6 +54,9 @@
 - `python-stage-02-scripting.md` — 阶段 2：Python 进阶与脚本能力
 - `python-stage-02-assessment.md` — 阶段 2 测试题
 - `python-stage-03-oop-async.md` — 阶段 3：Python 面向对象与异步基础
+- `python-stage-03-oop-async-advanced.md` — 阶段 3：Python 面向对象与异步编程全面深入版
+- `python-stage-03-assessment-advanced.md` — 阶段 3 测试题
+- `python-stage-04-api-backend.md` — 阶段 4：API 使用与后端服务基础
 
 ---
 
@@ -150,28 +153,120 @@ main()
 
 ---
 
-## 7. 当前阶段：阶段 3 — Python 面向对象与异步基础
+## 7. 阶段 3：Python 面向对象与异步编程（全面深入版）
+
+**状态**：已通过。
+
+已学习文件：
+
+```text
+python-stage-03-oop-async-advanced.md
+```
+
+阶段 3 学习重点（全面版）：
+
+**面向对象部分：**
+- `__init__` vs `__new__`（单例模式）
+- `@property`（计算属性、参数校验）
+- `@staticmethod`、`@classmethod`（方法类型）
+- 继承、`super()`、方法重写
+- `@dataclass` 高级特性：`field()`、`__post_init__`、`frozen`、`slots`
+- 类型系统：`TypedDict`、`Protocol`、`Literal`、`Union`、`Optional`
+- 抽象基类 `ABC`
+
+**异步编程部分：**
+- Event Loop 与协程原理
+- `coroutine` vs `Task` vs `Future`
+- `asyncio.create_task()` vs `asyncio.gather()` vs `asyncio.wait()`
+- 超时控制：`asyncio.wait_for()`
+- 异步上下文管理器：`async with`
+- 异步迭代器：`async for`
+- 异步生成器
+- 错误处理与异常传播
+- 并发控制：`Semaphore`
+
+**Agent 应用实战：**
+- Agent 架构设计模式
+- 工具系统设计
+- 并发调用与性能优化
+- 状态管理与会话持久化
+
+测试题文件：
+
+```text
+python-stage-03-assessment-advanced.md
+```
+
+测试题包含：
+- 概念理解题（10 题）
+- 代码分析题（5 题）
+- 设计题（2 题）
+- 综合编码题（1 题）
+
+阶段 3 判断：通过，可以进入阶段 4。
+
+---
+
+## 2026-06-02 update: Python deep reinforcement lesson 1 assessment
+
+User submitted answers for `python-deep-reinforcement-01-assessment.md`.
+
+Assessment result: not passed yet. Broad concepts are mostly understood, but engineering precision is still insufficient.
+
+Observed strengths:
+- Understands that Python executes statements from top to bottom.
+- Understands that names must exist before they are used.
+- Understands `True` vs `true` at a basic level.
+- Understands that `user_id: str` is a field/type declaration, not value assignment.
+- Understands the difference between defining a class and creating an object.
+- Understands that `+` behaves differently for numbers and strings.
+- Small coding exercise structure is mostly runnable.
+
+Observed issues:
+- Wrote `hTTPException` instead of `HTTPException`; this is still incorrect and would break import/runtime behavior.
+- Described `class UserRequest(BaseModel)` imprecisely as using BaseModel "parameters"; should be explained as inheritance from `BaseModel`.
+- Wrote `Userrequest` instead of `UserRequest` in explanation; case precision still needs reinforcement.
+- In the coding exercise, used title `"learn Python"` instead of required `"learn python"`. Field values must match requirements exactly.
+- Needs stricter attention to exact imports, capitalization, required literal values, and API/schema naming.
+
+Next action:
+- Do not advance to lesson 2 yet.
+- Give a short targeted reinforcement exercise focused on import precision, case sensitivity, exact requirement matching, and BaseModel inheritance.
+
+2026-06-02 follow-up reinforcement result: still not passed.
+
+New observed issues:
+- In text, wrote `HTTPExeption` instead of `HTTPException`; the missing `c` shows spelling precision is still unstable.
+- Incorrectly said `BaseModel` is provided by FastAPI. Correct source is Pydantic: `from pydantic import BaseModel`.
+- Corrected code omitted the required `BaseModel` import.
+- Kept class name as `taskrequest`; should use PascalCase `TaskRequest` for a class, and this matters for name consistency.
+- Indentation in the class body was not consistently 4 spaces.
+
+Next action:
+- Continue lesson 1 reinforcement.
+- Drill minimal runnable snippets requiring exact imports, PascalCase class names, Pydantic BaseModel, bool literals vs type declarations, and 4-space indentation.
+
+## 8. 当前阶段：阶段 4 — API 使用与后端服务基础
+
+**状态**：已进入阶段 4，已提供学习文档，等待学习者完成。
 
 当前应学习文件：
 
 ```text
-python-stage-03-oop-async.md
+python-stage-04-api-backend.md
 ```
 
-阶段 3 学习重点：
+阶段 4 学习重点：
 
-- `class`
-- `__init__`
-- `self`
-- 属性和方法
-- `dict` 和 `class` 的区别
-- `@dataclass`
-- 类型提示
-- `async def`
-- `await`
-- `asyncio.run()`
-- `asyncio.gather()`
-- 异步 Agent 的基础结构
+- HTTP 请求与响应模型
+- REST API 基础设计
+- FastAPI 后端服务入门
+- Pydantic 数据校验
+- 路由、请求体、查询参数、路径参数
+- 状态码与错误处理
+- 前后端调用链路
+- API Key 与环境变量
+- 为后续 LLM SDK、工具调用和 Agent 服务封装打基础
 
 学习者学完后会说：
 
@@ -179,11 +274,40 @@ python-stage-03-oop-async.md
 我学习完了
 ```
 
-之后需要出阶段 3 测试题，并继续分析学习结果。
+阶段 4 巩固情况：
+
+- 学习者已经能写出 FastAPI 请求/响应模型、POST 路由、请求对象读取和错误返回的大体结构。
+- 最新巩固题仍出现精确性问题：
+  - `fastapi` 写成 `faseapi`；
+  - `HTTPException` 写成 `HttpException`。
+- 这说明概念基本理解，但代码精确性仍不足。进入 LLM SDK 前，需要暂停路线，先做更深入、更全面、更实战的 Python 一对一强化。
+
+当前安排：
+
+```text
+暂停阶段 5：LLM SDK 使用
+先进入 Python 深度强化训练
+```
+
+新增训练文档：
+
+- `python-deep-reinforcement-roadmap.md` — Python 深度强化总路线
+- `python-deep-reinforcement-01-core-runtime.md` — 第 1 课：Python 运行模型、变量、类型、对象与精确性
+
+强化重点：
+
+- Python import 与模块名精确性；
+- 大小写敏感；
+- 函数、类、对象、实例化；
+- dict、dataclass、BaseModel 的选择；
+- 异常处理与错误传播；
+- FastAPI 请求/响应模型；
+- 代码是否能真实运行，而不是只表达大概意思；
+- 从前端迁移到 Python 时必须纠正的习惯。
 
 ---
 
-## 8. 教学提醒
+## 9. 教学提醒
 
 后续教学要继续关注：
 
@@ -196,9 +320,18 @@ python-stage-03-oop-async.md
    - `requests` 类似前端 `fetch`。
 4. 逐步把每个 Python 能力映射到 Agent 应用场景。
 
+教学风格更新：
+
+1. 用户要求更严格、更专业、更实战的一对一教学；
+2. 不要总是说“好”，不要过度鼓励；
+3. 需要主动提出问题让用户回答；
+4. 对答案要直接指出错误、风险和工程后果；
+5. 不要因为概念大体正确就放过拼写、大小写、导入、字段名、返回格式等基础错误；
+6. 进入 LLM SDK 前必须先补足 Python 精确性和实战编码能力。
+
 ---
 
-## 9. 文档输出约定（md + html 双份）
+## 10. 文档输出约定（md + html 双份）
 
 从 2026-06-08 起，学习文档和测试题采用 **md + html 双份**：
 

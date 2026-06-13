@@ -1,4 +1,4 @@
-# CLAUDE.md
+# AGENTS.md
 
 This project is a personal learning workspace for transitioning from frontend development to Agent / LLM application development.
 
