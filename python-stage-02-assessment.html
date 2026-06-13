@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Python 阶段 2 测试题</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #0d0d0d;
+    --muted: #6e6e80;
+    --border: #ececf1;
+    --inline-code-bg: rgba(0, 0, 0, 0.06);
+    --link: #0b57d0;
+    --code-bg: #0d1117;
+    --code-header-bg: #161b22;
+    --code-header-text: #9aa5b1;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 56px 24px 40px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+  h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 2.4em 0 0.8em;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 1.8em 0 0.6em;
+  }
+  h4 { font-size: 16px; font-weight: 600; margin: 1.4em 0 0.5em; }
+  p { margin: 0.85em 0; }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  strong { font-weight: 600; }
+  ul, ol { padding-left: 1.6em; margin: 0.85em 0; }
+  li { margin: 0.4em 0; }
+  li > ul, li > ol { margin: 0.4em 0; }
+  blockquote {
+    margin: 1.2em 0;
+    padding: 4px 0 4px 18px;
+    border-left: 3px solid var(--border);
+    color: var(--muted);
+  }
+  blockquote p { margin: 0.5em 0; }
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.2em 0;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.2em 0;
+    font-size: 0.95em;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    text-align: left;
+  }
+  thead th { background: var(--inline-code-bg); font-weight: 600; }
+  /* 行内代码 */
+  code {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 0.88em;
+    background: var(--inline-code-bg);
+    padding: 0.15em 0.4em;
+    border-radius: 6px;
+  }
+  /* 代码块 */
+  .code-block {
+    margin: 1.2em 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--code-bg);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .code-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 14px;
+    background: var(--code-header-bg);
+    color: var(--code-header-text);
+    font-size: 12px;
+    font-family: ui-sans-serif, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  .code-lang { text-transform: lowercase; letter-spacing: 0.02em; }
+  .copy-btn {
+    border: none;
+    background: transparent;
+    color: var(--code-header-text);
+    font-size: 12px;
+    cursor: pointer;
+    padding: 2px 8px;
+    border-radius: 6px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .copy-btn:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
+  .code-block pre {
+    margin: 0;
+    padding: 16px;
+    overflow-x: auto;
+    background: transparent;
+  }
+  .code-block pre code {
+    background: transparent;
+    padding: 0;
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: #e6edf3;
+  }
+  footer {
+    margin-top: 3em;
+    padding-top: 1.2em;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  footer code { background: transparent; color: inherit; padding: 0; }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #212121;
+      --text: #ececec;
+      --muted: #a6a6b0;
+      --border: #3a3a3a;
+      --inline-code-bg: rgba(255, 255, 255, 0.1);
+      --link: #7ab0ff;
+    }
+  }
+  @media (max-width: 600px) {
+    main { padding: 32px 16px; }
+    h1 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Python 阶段 2 测试题</h1>
+  <blockquote>
+  <p>阶段：Python 进阶与脚本能力</p>
+  <p>要求：不要查资料，直接根据自己的理解回答。可以按题号回答，不需要特别长，但代码题要尽量写完整。</p>
+  </blockquote>
+  <hr />
+  <h2>一、文件读写基础</h2>
+  <h3>1. 请解释下面代码是什么意思：</h3>
+  <pre><code class="language-python">with open(&quot;learning.txt&quot;, &quot;w&quot;, encoding=&quot;utf-8&quot;) as file:
+      file.write(&quot;我正在学习 Python&quot;)
+  </code></pre>
+  <p>你需要说明：</p>
+  <pre><code class="language-plaintext">with open 是做什么的？
+  &quot;w&quot; 是什么意思？
+  encoding=&quot;utf-8&quot; 是做什么的？
+  file.write() 是做什么的？
+  </code></pre>
+  <hr />
+  <h3>2. 下面三种文件模式分别是什么意思？</h3>
+  <pre><code class="language-python">&quot;r&quot;
+  &quot;w&quot;
+  &quot;a&quot;
+  </code></pre>
+  <p>请回答：</p>
+  <pre><code class="language-plaintext">&quot;r&quot;:
+  &quot;w&quot;:
+  &quot;a&quot;:
+  </code></pre>
+  <hr />
+  <h2>二、JSON 文件题</h2>
+  <h3>3. 请解释下面 4 个方法的区别：</h3>
+  <pre><code class="language-python">json.dumps()
+  json.loads()
+  json.dump()
+  json.load()
+  </code></pre>
+  <p>请按下面格式回答：</p>
+  <pre><code class="language-plaintext">json.dumps():
+  json.loads():
+  json.dump():
+  json.load():
+  </code></pre>
+  <p>提示：重点区分 <strong>字符串</strong> 和 <strong>文件</strong>。</p>
+  <hr />
+  <h3>4. 下面代码中，哪一行是把 Python 对象写入 JSON 文件？</h3>
+  <pre><code class="language-python">import json
+
+  record = {
+      &quot;name&quot;: &quot;Kai&quot;,
+      &quot;stage&quot;: &quot;Python 阶段 2&quot;
+  }
+
+  with open(&quot;record.json&quot;, &quot;w&quot;, encoding=&quot;utf-8&quot;) as file:
+      json.dump(record, file, ensure_ascii=False, indent=2)
+  </code></pre>
+  <p>请指出是哪一行，并解释这行代码的作用。</p>
+  <hr />
+  <h2>三、路径处理题</h2>
+  <h3>5. 请解释下面代码：</h3>
+  <pre><code class="language-python">from pathlib import Path
+
+  data_dir = Path(&quot;data&quot;)
+  data_dir.mkdir(exist_ok=True)
+
+  file_path = data_dir / &quot;stage_02_record.json&quot;
+  </code></pre>
+  <p>你需要说明：</p>
+  <pre><code class="language-plaintext">Path(&quot;data&quot;) 是什么？
+  mkdir(exist_ok=True) 是什么？
+  data_dir / &quot;stage_02_record.json&quot; 是什么？
+  </code></pre>
+  <hr />
+  <h2>四、异常处理题</h2>
+  <h3>6. 请解释下面代码的执行逻辑：</h3>
+  <pre><code class="language-python">try:
+      with open(&quot;not_exists.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file:
+          content = file.read()
+
+      print(content)
+
+  except FileNotFoundError:
+      print(&quot;文件不存在&quot;)
+  </code></pre>
+  <p>你需要回答：</p>
+  <ol>
+  <li>如果文件存在，会发生什么？</li>
+  <li>如果文件不存在，会发生什么？</li>
+  <li>为什么 Agent 应用开发中需要异常处理？</li>
+  </ol>
+  <hr />
+  <h2>五、函数模块化题</h2>
+  <h3>7. 为什么下面这种写法更适合以后做 Agent 应用？</h3>
+  <pre><code class="language-python">def save_record(record, file_path):
+      ...
+
+  def load_record(file_path):
+      ...
+
+  def main():
+      ...
+  </code></pre>
+  <p>请你结合以下角度回答：</p>
+  <ul>
+  <li>代码清晰度</li>
+  <li>复用</li>
+  <li>测试</li>
+  <li>Agent 工具封装</li>
+  </ul>
+  <hr />
+  <h2>六、HTTP 请求题</h2>
+  <h3>8. 请解释下面代码：</h3>
+  <pre><code class="language-python">import requests
+
+  response = requests.get(&quot;https://api.github.com&quot;)
+
+  print(response.status_code)
+  print(response.json())
+  </code></pre>
+  <p>你需要回答：</p>
+  <pre><code class="language-plaintext">requests.get() 是做什么的？
+  response.status_code 是什么？
+  response.json() 是什么？
+  它和前端 fetch 有什么相似点？
+  </code></pre>
+  <hr />
+  <h3>9. 请解释下面 POST 请求：</h3>
+  <pre><code class="language-python">payload = {
+      &quot;name&quot;: &quot;Kai&quot;,
+      &quot;stage&quot;: &quot;Python&quot;
+  }
+
+  response = requests.post(&quot;https://httpbin.org/post&quot;, json=payload)
+  </code></pre>
+  <p>这里的：</p>
+  <pre><code class="language-python">json=payload
+  </code></pre>
+  <p>是什么意思？<br />
+  它类似前端 <code>fetch</code> 里的什么写法？</p>
+  <hr />
+  <h2>七、环境变量题</h2>
+  <h3>10. 为什么 Agent 应用里的 API Key 不应该直接写死在代码里？</h3>
+  <p>例如不推荐这样写：</p>
+  <pre><code class="language-python">api_key = &quot;sk-xxxxxx&quot;
+  </code></pre>
+  <p>请说明原因，并写出 Python 中读取环境变量的代码：</p>
+  <pre><code class="language-python">import os
+
+  ...
+  </code></pre>
+  <hr />
+  <h2>八、小编码题</h2>
+  <h3>11. 请写一段完整 Python 代码，要求：</h3>
+  <ol>
+  <li>导入 <code>json</code></li>
+  <li>从 <code>pathlib</code> 导入 <code>Path</code></li>
+  <li>定义函数 <code>save_record(record, file_path)</code></li>
+  <li>定义函数 <code>load_record(file_path)</code></li>
+  <li>在 <code>main()</code> 中：
+     - 创建 <code>data</code> 文件夹
+     - 定义 <code>learning_record</code> 字典，包含：<ul>
+  <li><code>name</code></li>
+  <li><code>role</code></li>
+  <li><code>target</code></li>
+  <li><code>stage</code></li>
+  <li><code>completed</code></li>
+  <li><code>topics</code></li>
+  <li>把它保存到：</li>
+  </ul>
+  </li>
+  </ol>
+  <pre><code class="language-plaintext">data/stage_02_record.json
+  </code></pre>
+  <ul>
+  <li>再从文件读取回来</li>
+  <li>打印：</li>
+  </ul>
+  <pre><code class="language-plaintext">当前阶段：Python 阶段 2
+  学习目标：Agent developer
+  </code></pre>
+  <p>参考结构：</p>
+  <pre><code class="language-python">import json
+  from pathlib import Path
+
+
+  def save_record(record, file_path):
+      ...
+
+
+  def load_record(file_path):
+      ...
+
+
+  def main():
+      ...
+
+
+  main()
+  </code></pre>
+  <hr />
+  <h2>回答格式</h2>
+  <p>请按下面格式回答：</p>
+  <pre><code class="language-plaintext">1. ...
+  2. ...
+  3. ...
+  ...
+  11. ...
+  </code></pre>
+  <p>回答完成后，我会分析你的学习结果，并判断你是否通过 <strong>Python 阶段 2</strong>。</p>
+  <footer>本页由 <code>python-stage-02-assessment.md</code> 转换生成 · 文档阅读风格（参考 ChatGPT 页面）</footer>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("main pre").forEach(function (pre) {
+      var code = pre.querySelector("code");
+      if (!code) return;
+      var match = code.className.match(/language-([\w-]+)/);
+      var lang = match ? match[1] : "text";
+      var label = lang === "plaintext" ? "text" : lang;
+      var wrapper = document.createElement("div");
+      wrapper.className = "code-block";
+      pre.parentNode.insertBefore(wrapper, pre);
+      var header = document.createElement("div");
+      header.className = "code-header";
+      var langSpan = document.createElement("span");
+      langSpan.className = "code-lang";
+      langSpan.textContent = label;
+      var btn = document.createElement("button");
+      btn.className = "copy-btn";
+      btn.type = "button";
+      btn.textContent = "复制";
+      btn.addEventListener("click", function () {
+        navigator.clipboard.writeText(code.innerText).then(function () {
+          btn.textContent = "已复制";
+          setTimeout(function () { btn.textContent = "复制"; }, 1500);
+        }).catch(function () {
+          btn.textContent = "复制失败";
+          setTimeout(function () { btn.textContent = "复制"; }, 1500);
+        });
+      });
+      header.appendChild(langSpan);
+      header.appendChild(btn);
+      wrapper.appendChild(header);
+      wrapper.appendChild(pre);
+    });
+    if (window.hljs) {
+      document.querySelectorAll("pre code").forEach(function (block) {
+        try { hljs.highlightElement(block); } catch (e) {}
+      });
+    }
+  });
+</script>
+</body>
+</html>

@@ -195,3 +195,18 @@ python-stage-03-oop-async.md
    - Python `async/await` 类似 JS `async/await`；
    - `requests` 类似前端 `fetch`。
 4. 逐步把每个 Python 能力映射到 Agent 应用场景。
+
+---
+
+## 9. 文档输出约定（md + html 双份）
+
+从 2026-06-08 起，学习文档和测试题采用 **md + html 双份**：
+
+- 继续维护 `.md`（方便编辑和 diff）；
+- 每篇额外导出一份同名 `.html`，风格参考 ChatGPT 页面的**文档阅读风格**：
+  - 居中单栏、清爽排版、深色代码块（带语言标签 + 复制按钮）；
+  - 语法高亮用 highlight.js CDN，离线自动降级为深色纯文本块；
+  - 跟随系统深/浅色（`prefers-color-scheme`）。
+- 已生成 HTML：`python-stage-01-basics`、`python-stage-02-scripting`、`python-stage-02-assessment`、`python-stage-03-oop-async`、`python-stage-03-assessment`。
+- 用户**不希望仓库里保留转换脚本**：批量转换时用一次性临时方式完成（装到临时目录、跑完即删）。
+- 新增文档时，记得同步产出 `.html`。

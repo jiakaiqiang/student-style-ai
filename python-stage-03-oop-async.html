@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent 应用开发学习路线：阶段 3 — Python 面向对象与异步基础</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #0d0d0d;
+    --muted: #6e6e80;
+    --border: #ececf1;
+    --inline-code-bg: rgba(0, 0, 0, 0.06);
+    --link: #0b57d0;
+    --code-bg: #0d1117;
+    --code-header-bg: #161b22;
+    --code-header-text: #9aa5b1;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 56px 24px 40px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+  h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 2.4em 0 0.8em;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 1.8em 0 0.6em;
+  }
+  h4 { font-size: 16px; font-weight: 600; margin: 1.4em 0 0.5em; }
+  p { margin: 0.85em 0; }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  strong { font-weight: 600; }
+  ul, ol { padding-left: 1.6em; margin: 0.85em 0; }
+  li { margin: 0.4em 0; }
+  li > ul, li > ol { margin: 0.4em 0; }
+  blockquote {
+    margin: 1.2em 0;
+    padding: 4px 0 4px 18px;
+    border-left: 3px solid var(--border);
+    color: var(--muted);
+  }
+  blockquote p { margin: 0.5em 0; }
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.2em 0;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.2em 0;
+    font-size: 0.95em;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    text-align: left;
+  }
+  thead th { background: var(--inline-code-bg); font-weight: 600; }
+  /* 行内代码 */
+  code {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 0.88em;
+    background: var(--inline-code-bg);
+    padding: 0.15em 0.4em;
+    border-radius: 6px;
+  }
+  /* 代码块 */
+  .code-block {
+    margin: 1.2em 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--code-bg);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .code-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 14px;
+    background: var(--code-header-bg);
+    color: var(--code-header-text);
+    font-size: 12px;
+    font-family: ui-sans-serif, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  .code-lang { text-transform: lowercase; letter-spacing: 0.02em; }
+  .copy-btn {
+    border: none;
+    background: transparent;
+    color: var(--code-header-text);
+    font-size: 12px;
+    cursor: pointer;
+    padding: 2px 8px;
+    border-radius: 6px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .copy-btn:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
+  .code-block pre {
+    margin: 0;
+    padding: 16px;
+    overflow-x: auto;
+    background: transparent;
+  }
+  .code-block pre code {
+    background: transparent;
+    padding: 0;
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: #e6edf3;
+  }
+  footer {
+    margin-top: 3em;
+    padding-top: 1.2em;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  footer code { background: transparent; color: inherit; padding: 0; }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #212121;
+      --text: #ececec;
+      --muted: #a6a6b0;
+      --border: #3a3a3a;
+      --inline-code-bg: rgba(255, 255, 255, 0.1);
+      --link: #7ab0ff;
+    }
+  }
+  @media (max-width: 600px) {
+    main { padding: 32px 16px; }
+    h1 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Agent 应用开发学习路线：阶段 3 — Python 面向对象与异步基础</h1>
+  <blockquote>
+  <p>学习对象：有前端开发经验，已学习 Python 基础与脚本能力。</p>
+  <p>当前阶段目标：理解 Python 面向对象和异步编程基础，为后续学习 LLM SDK、工具封装、Agent 工作流、并发 API 调用打基础。</p>
+  </blockquote>
+  <hr />
+  <h2>0. 学习方式</h2>
+  <p>你先学习本文件，并完成最后的练习。</p>
+  <p>当你学习完成后，直接告诉我：</p>
+  <pre><code class="language-plaintext">我学习完了
+  </code></pre>
+  <p>然后我会给你出阶段 3 测试题。你回答后，我会分析你的掌握情况，并判断是否进入阶段 4。</p>
+  <hr />
+  <h2>1. 为什么 Agent 开发需要面向对象和异步？</h2>
+  <p>真实 Agent 应用中，经常会出现这些对象：</p>
+  <ul>
+  <li>用户 User</li>
+  <li>消息 Message</li>
+  <li>工具 Tool</li>
+  <li>任务 Task</li>
+  <li>Agent</li>
+  <li>对话 Session</li>
+  <li>配置 Config</li>
+  <li>模型客户端 ModelClient</li>
+  </ul>
+  <p>这些对象通常都有自己的数据和行为。</p>
+  <p>例如一个 Agent 可能需要：</p>
+  <pre><code class="language-plaintext">保存名字
+  保存可用工具列表
+  接收用户输入
+  调用模型
+  调用工具
+  返回结果
+  </code></pre>
+  <p>这就很适合用 class 表达。</p>
+  <p>同时，Agent 经常要调用外部服务：</p>
+  <ul>
+  <li>模型 API</li>
+  <li>搜索 API</li>
+  <li>数据库</li>
+  <li>文件系统</li>
+  <li>工具服务</li>
+  </ul>
+  <p>这些操作可能比较慢，所以需要异步编程来提高效率。</p>
+  <hr />
+  <h2>2. 面向对象基础：class</h2>
+  <p>JavaScript 中你可能写过：</p>
+  <pre><code class="language-js">class User {
+    constructor(name) {
+      this.name = name
+    }
+
+    sayHello() {
+      console.log(`Hello, ${this.name}`)
+    }
+  }
+  </code></pre>
+  <p>Python 中类似：</p>
+  <pre><code class="language-python">class User:
+      def __init__(self, name):
+          self.name = name
+
+      def say_hello(self):
+          print(f&quot;Hello, {self.name}&quot;)
+
+
+  user = User(&quot;Kai&quot;)
+  user.say_hello()
+  </code></pre>
+  <p>输出：</p>
+  <pre><code class="language-plaintext">Hello, Kai
+  </code></pre>
+  <hr />
+  <h2>3. <strong>init</strong> 是什么？</h2>
+  <pre><code class="language-python">def __init__(self, name):
+      self.name = name
+  </code></pre>
+  <p><code>__init__</code> 是初始化方法。创建对象时会自动执行。</p>
+  <p>例如：</p>
+  <pre><code class="language-python">user = User(&quot;Kai&quot;)
+  </code></pre>
+  <p>会自动调用：</p>
+  <pre><code class="language-python">__init__(self, &quot;Kai&quot;)
+  </code></pre>
+  <p>你可以把它类比成 JavaScript 的：</p>
+  <pre><code class="language-js">constructor(name) {}
+  </code></pre>
+  <hr />
+  <h2>4. self 是什么？</h2>
+  <p><code>self</code> 表示当前对象本身。</p>
+  <pre><code class="language-python">class User:
+      def __init__(self, name):
+          self.name = name
+  </code></pre>
+  <p>这里：</p>
+  <pre><code class="language-python">self.name = name
+  </code></pre>
+  <p>意思是：把传进来的 <code>name</code> 保存到当前对象的 <code>name</code> 属性上。</p>
+  <p>类似 JS：</p>
+  <pre><code class="language-js">this.name = name
+  </code></pre>
+  <p>所以可以简单记：</p>
+  <pre><code class="language-plaintext">Python self 类似 JavaScript this
+  </code></pre>
+  <p>注意：Python 类方法第一个参数通常都要写 <code>self</code>。</p>
+  <hr />
+  <h2>5. 属性和方法</h2>
+  <pre><code class="language-python">class LearningRecord:
+      def __init__(self, name, stage):
+          self.name = name
+          self.stage = stage
+
+      def summary(self):
+          return f&quot;{self.name} 正在学习 {self.stage}&quot;
+
+
+  record = LearningRecord(&quot;Kai&quot;, &quot;Python 阶段 3&quot;)
+  print(record.name)
+  print(record.summary())
+  </code></pre>
+  <p>输出：</p>
+  <pre><code class="language-plaintext">Kai
+  Kai 正在学习 Python 阶段 3
+  </code></pre>
+  <p>说明：</p>
+  <pre><code class="language-plaintext">record.name 是属性
+  record.summary() 是方法
+  </code></pre>
+  <hr />
+  <h2>6. 用 class 表示 Agent</h2>
+  <p>一个简单 Agent 可以这样表示：</p>
+  <pre><code class="language-python">class SimpleAgent:
+      def __init__(self, name):
+          self.name = name
+          self.tools = []
+
+      def add_tool(self, tool_name):
+          self.tools.append(tool_name)
+
+      def list_tools(self):
+          return self.tools
+
+      def run(self, user_input):
+          return f&quot;{self.name} 收到任务：{user_input}&quot;
+
+
+  agent = SimpleAgent(&quot;学习助手&quot;)
+  agent.add_tool(&quot;读取文件&quot;)
+  agent.add_tool(&quot;保存记录&quot;)
+
+  print(agent.list_tools())
+  print(agent.run(&quot;帮我学习 Python&quot;))
+  </code></pre>
+  <p>输出：</p>
+  <pre><code class="language-plaintext">['读取文件', '保存记录']
+  学习助手 收到任务：帮我学习 Python
+  </code></pre>
+  <hr />
+  <h2>7. 类和 dict 的区别</h2>
+  <p>你之前学过 dict：</p>
+  <pre><code class="language-python">agent = {
+      &quot;name&quot;: &quot;学习助手&quot;,
+      &quot;tools&quot;: [&quot;读取文件&quot;, &quot;保存记录&quot;]
+  }
+  </code></pre>
+  <p>dict 适合保存数据。</p>
+  <p>class 不仅能保存数据，还能保存行为：</p>
+  <pre><code class="language-python">class SimpleAgent:
+      def run(self, user_input):
+          ...
+  </code></pre>
+  <p>对比：</p>
+  <table>
+  <thead>
+  <tr>
+  <th>类型</th>
+  <th>适合做什么</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td>dict</td>
+  <td>保存结构化数据</td>
+  </tr>
+  <tr>
+  <td>class</td>
+  <td>同时组织数据和行为</td>
+  </tr>
+  </tbody>
+  </table>
+  <p>Agent 应用里，两者都会用。</p>
+  <hr />
+  <h2>8. dataclass 简介</h2>
+  <p>如果一个类主要用来存数据，可以用 <code>dataclass</code> 简化。</p>
+  <pre><code class="language-python">from dataclasses import dataclass
+
+
+  @dataclass
+  class Message:
+      role: str
+      content: str
+
+
+  message = Message(role=&quot;user&quot;, content=&quot;你好&quot;)
+  print(message.role)
+  print(message.content)
+  </code></pre>
+  <p>这比手写 <code>__init__</code> 简洁。</p>
+  <p>等价于你不用自己写：</p>
+  <pre><code class="language-python">def __init__(self, role, content):
+      self.role = role
+      self.content = content
+  </code></pre>
+  <p>在 Agent 应用中，Message 很常见：</p>
+  <pre><code class="language-python">Message(role=&quot;user&quot;, content=&quot;帮我总结这个文件&quot;)
+  Message(role=&quot;assistant&quot;, content=&quot;好的，我来处理&quot;)
+  </code></pre>
+  <hr />
+  <h2>9. 类型提示基础</h2>
+  <p>Python 可以写类型提示：</p>
+  <pre><code class="language-python">def add(a: int, b: int) -&gt; int:
+      return a + b
+  </code></pre>
+  <p>含义：</p>
+  <pre><code class="language-plaintext">a 是 int
+  b 是 int
+  返回值是 int
+  </code></pre>
+  <p>类型提示不会像 TypeScript 那样在运行前强制检查，但它可以：</p>
+  <ul>
+  <li>提升可读性；</li>
+  <li>帮助 IDE 提示；</li>
+  <li>方便后续维护；</li>
+  <li>让 Agent 工具参数更清晰。</li>
+  </ul>
+  <p>示例：</p>
+  <pre><code class="language-python">def build_message(name: str, stage: str) -&gt; str:
+      return f&quot;{name} 正在学习 {stage}&quot;
+  </code></pre>
+  <hr />
+  <h2>10. 异步编程 async / await</h2>
+  <p>你作为前端开发者，应该熟悉 JS 的：</p>
+  <pre><code class="language-js">async function fetchData() {
+    const response = await fetch(url)
+    return await response.json()
+  }
+  </code></pre>
+  <p>Python 也有类似语法：</p>
+  <pre><code class="language-python">import asyncio
+
+
+  async def fetch_data():
+      await asyncio.sleep(1)
+      return &quot;数据加载完成&quot;
+
+
+  async def main():
+      result = await fetch_data()
+      print(result)
+
+
+  asyncio.run(main())
+  </code></pre>
+  <p>输出：</p>
+  <pre><code class="language-plaintext">数据加载完成
+  </code></pre>
+  <hr />
+  <h2>11. async def 是什么？</h2>
+  <pre><code class="language-python">async def fetch_data():
+      ...
+  </code></pre>
+  <p>表示定义一个异步函数。</p>
+  <p>异步函数调用后不会立即得到普通结果，而是得到一个可等待对象，需要用：</p>
+  <pre><code class="language-python">await fetch_data()
+  </code></pre>
+  <p>等待它完成。</p>
+  <hr />
+  <h2>12. await 是什么？</h2>
+  <pre><code class="language-python">result = await fetch_data()
+  </code></pre>
+  <p><code>await</code> 表示等待异步任务完成，并拿到结果。</p>
+  <p>它类似 JS 里的：</p>
+  <pre><code class="language-js">const result = await fetchData()
+  </code></pre>
+  <hr />
+  <h2>13. asyncio.sleep 和 time.sleep 的区别</h2>
+  <p>同步阻塞：</p>
+  <pre><code class="language-python">import time
+
+  time.sleep(1)
+  print(&quot;完成&quot;)
+  </code></pre>
+  <p><code>time.sleep(1)</code> 会阻塞整个程序。</p>
+  <p>异步等待：</p>
+  <pre><code class="language-python">import asyncio
+
+  await asyncio.sleep(1)
+  </code></pre>
+  <p><code>asyncio.sleep(1)</code> 是非阻塞等待，适合异步任务。</p>
+  <hr />
+  <h2>14. 并发执行多个任务</h2>
+  <p>Agent 可能需要同时做多个慢操作，例如：</p>
+  <ul>
+  <li>查天气；</li>
+  <li>搜索资料；</li>
+  <li>读取数据库；</li>
+  <li>调用多个 API。</li>
+  </ul>
+  <p>Python 可以用 <code>asyncio.gather()</code> 并发执行：</p>
+  <pre><code class="language-python">import asyncio
+
+
+  async def task(name, delay):
+      await asyncio.sleep(delay)
+      return f&quot;{name} 完成&quot;
+
+
+  async def main():
+      results = await asyncio.gather(
+          task(&quot;任务 A&quot;, 2),
+          task(&quot;任务 B&quot;, 1),
+          task(&quot;任务 C&quot;, 3)
+      )
+
+      print(results)
+
+
+  asyncio.run(main())
+  </code></pre>
+  <p>输出大概是：</p>
+  <pre><code class="language-plaintext">['任务 A 完成', '任务 B 完成', '任务 C 完成']
+  </code></pre>
+  <p>虽然任务 C 等 3 秒，但三个任务是同时开始的，总耗时约 3 秒，而不是 2 + 1 + 3 = 6 秒。</p>
+  <hr />
+  <h2>15. 异步 Agent 示例</h2>
+  <pre><code class="language-python">import asyncio
+
+
+  class AsyncAgent:
+      def __init__(self, name):
+          self.name = name
+
+      async def call_model(self, prompt):
+          await asyncio.sleep(1)
+          return f&quot;模型回复：已处理 {prompt}&quot;
+
+      async def run(self, user_input):
+          result = await self.call_model(user_input)
+          return f&quot;{self.name}: {result}&quot;
+
+
+  async def main():
+      agent = AsyncAgent(&quot;学习助手&quot;)
+      result = await agent.run(&quot;学习 Python async&quot;)
+      print(result)
+
+
+  asyncio.run(main())
+  </code></pre>
+  <p>这里：</p>
+  <pre><code class="language-python">async def call_model(...)
+  </code></pre>
+  <p>模拟调用模型 API。</p>
+  <p>真实项目里，这里会替换成：</p>
+  <pre><code class="language-python">await client.messages.create(...)
+  </code></pre>
+  <p>或者其他异步 SDK 调用。</p>
+  <hr />
+  <h2>16. 常见错误</h2>
+  <h3>16.1 忘记 self</h3>
+  <p>错误：</p>
+  <pre><code class="language-python">class User:
+      def __init__(name):
+          name = name
+  </code></pre>
+  <p>正确：</p>
+  <pre><code class="language-python">class User:
+      def __init__(self, name):
+          self.name = name
+  </code></pre>
+  <hr />
+  <h3>16.2 忘记 await</h3>
+  <p>错误：</p>
+  <pre><code class="language-python">result = fetch_data()
+  print(result)
+  </code></pre>
+  <p>这可能打印出 coroutine 对象，而不是实际结果。</p>
+  <p>正确：</p>
+  <pre><code class="language-python">result = await fetch_data()
+  print(result)
+  </code></pre>
+  <hr />
+  <h3>16.3 顶层直接 await</h3>
+  <p>普通 Python 文件里不能直接：</p>
+  <pre><code class="language-python">result = await fetch_data()
+  </code></pre>
+  <p>通常要写：</p>
+  <pre><code class="language-python">async def main():
+      result = await fetch_data()
+
+  asyncio.run(main())
+  </code></pre>
+  <hr />
+  <h2>17. Agent 应用中的对应关系</h2>
+  <table>
+  <thead>
+  <tr>
+  <th>Python 能力</th>
+  <th>Agent 应用中的作用</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td>class</td>
+  <td>表示 Agent、Tool、Task、Message 等对象</td>
+  </tr>
+  <tr>
+  <td><strong>init</strong></td>
+  <td>初始化对象状态</td>
+  </tr>
+  <tr>
+  <td>self</td>
+  <td>访问当前对象的数据和方法</td>
+  </tr>
+  <tr>
+  <td>方法</td>
+  <td>表示对象能做的动作</td>
+  </tr>
+  <tr>
+  <td>dataclass</td>
+  <td>简洁定义消息、配置、任务等数据结构</td>
+  </tr>
+  <tr>
+  <td>类型提示</td>
+  <td>让工具参数和返回值更清晰</td>
+  </tr>
+  <tr>
+  <td>async/await</td>
+  <td>调用模型 API、工具 API、数据库等慢操作</td>
+  </tr>
+  <tr>
+  <td>asyncio.gather</td>
+  <td>并发执行多个外部调用</td>
+  </tr>
+  </tbody>
+  </table>
+  <hr />
+  <h2>18. 阶段 3 自查清单</h2>
+  <p>学习完成后，你应该能回答：</p>
+  <ol>
+  <li><code>class</code> 是做什么的？</li>
+  <li><code>__init__</code> 类似 JavaScript 中的什么？</li>
+  <li><code>self</code> 类似 JavaScript 中的什么？</li>
+  <li>属性和方法有什么区别？</li>
+  <li>dict 和 class 的区别是什么？</li>
+  <li><code>@dataclass</code> 适合什么场景？</li>
+  <li>类型提示有什么用？</li>
+  <li><code>async def</code> 是什么？</li>
+  <li><code>await</code> 是什么？</li>
+  <li><code>asyncio.gather()</code> 适合什么场景？</li>
+  <li>为什么 Agent 开发经常需要异步？</li>
+  </ol>
+  <hr />
+  <h2>19. 阶段 3 练习</h2>
+  <p>请你学习后完成下面练习。</p>
+  <h3>练习 1：定义一个学习记录类</h3>
+  <p>要求：</p>
+  <ol>
+  <li>定义 <code>LearningRecord</code> 类；</li>
+  <li><code>__init__</code> 接收：
+     - <code>name</code>
+     - <code>stage</code>
+     - <code>target</code></li>
+  <li>保存到对象属性上；</li>
+  <li>定义 <code>summary()</code> 方法，返回：</li>
+  </ol>
+  <pre><code class="language-plaintext">你的名字 正在学习 Python 阶段 3，目标是 Agent developer
+  </code></pre>
+  <hr />
+  <h3>练习 2：定义 Message dataclass</h3>
+  <p>要求：</p>
+  <ol>
+  <li>使用 <code>@dataclass</code></li>
+  <li>定义 <code>Message</code></li>
+  <li>包含：
+     - <code>role: str</code>
+     - <code>content: str</code></li>
+  <li>创建一个用户消息：</li>
+  </ol>
+  <pre><code class="language-python">Message(role=&quot;user&quot;, content=&quot;我正在学习 Agent 开发&quot;)
+  </code></pre>
+  <hr />
+  <h3>练习 3：异步 Agent</h3>
+  <p>要求：</p>
+  <ol>
+  <li>定义 <code>AsyncLearningAgent</code> 类；</li>
+  <li><code>__init__</code> 接收 <code>name</code>；</li>
+  <li>定义异步方法 <code>call_model(prompt)</code>；</li>
+  <li>在 <code>call_model</code> 中使用 <code>await asyncio.sleep(1)</code> 模拟模型调用；</li>
+  <li>返回：</li>
+  </ol>
+  <pre><code class="language-plaintext">模型已处理：你的输入
+  </code></pre>
+  <ol start="6">
+  <li>定义异步方法 <code>run(user_input)</code>；</li>
+  <li>在 <code>run</code> 中 <code>await self.call_model(user_input)</code>；</li>
+  <li>用 <code>asyncio.run(main())</code> 运行。</li>
+  </ol>
+  <p>参考结构：</p>
+  <pre><code class="language-python">import asyncio
+  from dataclasses import dataclass
+
+
+  @dataclass
+  class Message:
+      role: str
+      content: str
+
+
+  class AsyncLearningAgent:
+      def __init__(self, name):
+          ...
+
+      async def call_model(self, prompt):
+          ...
+
+      async def run(self, user_input):
+          ...
+
+
+  async def main():
+      ...
+
+
+  asyncio.run(main())
+  </code></pre>
+  <hr />
+  <h2>20. 学完后告诉我</h2>
+  <p>学习完成后，直接回复：</p>
+  <pre><code class="language-plaintext">我学习完了
+  </code></pre>
+  <p>然后我会给你出阶段 3 测试题，并根据你的答案判断是否进入：</p>
+  <pre><code class="language-plaintext">阶段 4：API 使用与后端服务基础
+  </code></pre>
+  <footer>本页由 <code>python-stage-03-oop-async.md</code> 转换生成 · 文档阅读风格（参考 ChatGPT 页面）</footer>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("main pre").forEach(function (pre) {
+      var code = pre.querySelector("code");
+      if (!code) return;
+      var match = code.className.match(/language-([\w-]+)/);
+      var lang = match ? match[1] : "text";
+      var label = lang === "plaintext" ? "text" : lang;
+      var wrapper = document.createElement("div");
+      wrapper.className = "code-block";
+      pre.parentNode.insertBefore(wrapper, pre);
+      var header = document.createElement("div");
+      header.className = "code-header";
+      var langSpan = document.createElement("span");
+      langSpan.className = "code-lang";
+      langSpan.textContent = label;
+      var btn = document.createElement("button");
+      btn.className = "copy-btn";
+      btn.type = "button";
+      btn.textContent = "复制";
+      btn.addEventListener("click", function () {
+        navigator.clipboard.writeText(code.innerText).then(function () {
+          btn.textContent = "已复制";
+          setTimeout(function () { btn.textContent = "复制"; }, 1500);
+        }).catch(function () {
+          btn.textContent = "复制失败";
+          setTimeout(function () { btn.textContent = "复制"; }, 1500);
+        });
+      });
+      header.appendChild(langSpan);
+      header.appendChild(btn);
+      wrapper.appendChild(header);
+      wrapper.appendChild(pre);
+    });
+    if (window.hljs) {
+      document.querySelectorAll("pre code").forEach(function (block) {
+        try { hljs.highlightElement(block); } catch (e) {}
+      });
+    }
+  });
+</script>
+</body>
+</html>

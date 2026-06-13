@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent 应用开发学习路线：阶段 2 — Python 进阶与脚本能力</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #0d0d0d;
+    --muted: #6e6e80;
+    --border: #ececf1;
+    --inline-code-bg: rgba(0, 0, 0, 0.06);
+    --link: #0b57d0;
+    --code-bg: #0d1117;
+    --code-header-bg: #161b22;
+    --code-header-text: #9aa5b1;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 56px 24px 40px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+  h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 2.4em 0 0.8em;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 1.8em 0 0.6em;
+  }
+  h4 { font-size: 16px; font-weight: 600; margin: 1.4em 0 0.5em; }
+  p { margin: 0.85em 0; }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  strong { font-weight: 600; }
+  ul, ol { padding-left: 1.6em; margin: 0.85em 0; }
+  li { margin: 0.4em 0; }
+  li > ul, li > ol { margin: 0.4em 0; }
+  blockquote {
+    margin: 1.2em 0;
+    padding: 4px 0 4px 18px;
+    border-left: 3px solid var(--border);
+    color: var(--muted);
+  }
+  blockquote p { margin: 0.5em 0; }
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.2em 0;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.2em 0;
+    font-size: 0.95em;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    text-align: left;
+  }
+  thead th { background: var(--inline-code-bg); font-weight: 600; }
+  /* 行内代码 */
+  code {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 0.88em;
+    background: var(--inline-code-bg);
+    padding: 0.15em 0.4em;
+    border-radius: 6px;
+  }
+  /* 代码块 */
+  .code-block {
+    margin: 1.2em 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--code-bg);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .code-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 14px;
+    background: var(--code-header-bg);
+    color: var(--code-header-text);
+    font-size: 12px;
+    font-family: ui-sans-serif, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  .code-lang { text-transform: lowercase; letter-spacing: 0.02em; }
+  .copy-btn {
+    border: none;
+    background: transparent;
+    color: var(--code-header-text);
+    font-size: 12px;
+    cursor: pointer;
+    padding: 2px 8px;
+    border-radius: 6px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .copy-btn:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
+  .code-block pre {
+    margin: 0;
+    padding: 16px;
+    overflow-x: auto;
+    background: transparent;
+  }
+  .code-block pre code {
+    background: transparent;
+    padding: 0;
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: #e6edf3;
+  }
+  footer {
+    margin-top: 3em;
+    padding-top: 1.2em;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  footer code { background: transparent; color: inherit; padding: 0; }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #212121;
+      --text: #ececec;
+      --muted: #a6a6b0;
+      --border: #3a3a3a;
+      --inline-code-bg: rgba(255, 255, 255, 0.1);
+      --link: #7ab0ff;
+    }
+  }
+  @media (max-width: 600px) {
+    main { padding: 32px 16px; }
+    h1 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Agent 应用开发学习路线：阶段 2 — Python 进阶与脚本能力</h1>
+  <blockquote>
+  <p>学习对象：有前端开发经验，正在从 Python 基础进入 Agent 应用开发。</p>
+  <p>当前阶段目标：从“会写基础语法”进入“能写小脚本”，为后续调用模型 API、读写文件、管理状态、封装工具函数打基础。</p>
+  </blockquote>
+  <hr />
+  <h2>0. 学习方式</h2>
+  <p>你先学习本文件，并完成最后的练习。</p>
+  <p>当你学习完成后，直接告诉我：</p>
+  <pre><code class="language-plaintext">我学习完了
+  </code></pre>
+  <p>然后我会给你出阶段 2 测试题。你回答后，我会分析你的掌握情况，并判断是否进入阶段 3。</p>
+  <hr />
+  <h2>1. 为什么 Agent 开发需要脚本能力？</h2>
+  <p>真实的 Agent 应用不只是和大模型聊天，它通常还要：</p>
+  <ul>
+  <li>读取用户文件；</li>
+  <li>保存任务状态；</li>
+  <li>读取配置；</li>
+  <li>调用 HTTP API；</li>
+  <li>调用模型接口；</li>
+  <li>处理错误；</li>
+  <li>把逻辑封装成工具函数；</li>
+  <li>把结果保存为 JSON。</li>
+  </ul>
+  <p>例如：</p>
+  <pre><code class="language-plaintext">用户上传简历
+  Python 读取文件
+  调用模型分析简历
+  生成学习计划
+  保存学习记录
+  下一次继续读取学习状态
+  </code></pre>
+  <p>所以这一阶段重点不是复杂算法，而是掌握“脚本式开发能力”。</p>
+  <hr />
+  <h2>2. 文件读写</h2>
+  <h3>2.1 写入文件</h3>
+  <pre><code class="language-python">content = &quot;我正在学习 Python，为 Agent 应用开发做准备。&quot;
+
+  with open(&quot;learning.txt&quot;, &quot;w&quot;, encoding=&quot;utf-8&quot;) as file:
+      file.write(content)
+  </code></pre>
+  <p>解释：</p>
+  <pre><code class="language-python">open(&quot;learning.txt&quot;, &quot;w&quot;, encoding=&quot;utf-8&quot;)
+  </code></pre>
+  <p>含义：</p>
+  <pre><code class="language-plaintext">learning.txt       文件名
+  w                  写入模式，会覆盖原内容
+  encoding=&quot;utf-8&quot;   使用 UTF-8 编码，支持中文
+  </code></pre>
+  <p><code>with</code> 的作用是：文件使用完成后自动关闭。</p>
+  <hr />
+  <h3>2.2 读取文件</h3>
+  <pre><code class="language-python">with open(&quot;learning.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file:
+      content = file.read()
+
+  print(content)
+  </code></pre>
+  <p>解释：</p>
+  <pre><code class="language-plaintext">r          read，读取模式
+  file.read 读取整个文件内容
+  </code></pre>
+  <hr />
+  <h3>2.3 追加文件</h3>
+  <pre><code class="language-python">with open(&quot;learning.txt&quot;, &quot;a&quot;, encoding=&quot;utf-8&quot;) as file:
+      file.write(&quot;\n今天学习了文件读写。&quot;)
+  </code></pre>
+  <p>解释：</p>
+  <pre><code class="language-plaintext">a          append，追加模式
+  </code></pre>
+  <p>追加模式不会覆盖原来的内容。</p>
+  <hr />
+  <h2>3. JSON 文件读写</h2>
+  <p>阶段 1 学过：</p>
+  <pre><code class="language-python">json.dumps()
+  json.loads()
+  </code></pre>
+  <p>这一阶段要再学两个：</p>
+  <pre><code class="language-python">json.dump()
+  json.load()
+  </code></pre>
+  <p>记忆方法：</p>
+  <pre><code class="language-plaintext">带 s 的处理字符串：dumps / loads
+  不带 s 的处理文件：dump / load
+  </code></pre>
+  <hr />
+  <h3>3.1 Python 对象写入 JSON 文件</h3>
+  <pre><code class="language-python">import json
+
+  record = {
+      &quot;name&quot;: &quot;Kai&quot;,
+      &quot;stage&quot;: &quot;Python 阶段 2&quot;,
+      &quot;completed&quot;: False,
+      &quot;topics&quot;: [&quot;文件读写&quot;, &quot;异常处理&quot;, &quot;HTTP 请求&quot;]
+  }
+
+  with open(&quot;record.json&quot;, &quot;w&quot;, encoding=&quot;utf-8&quot;) as file:
+      json.dump(record, file, ensure_ascii=False, indent=2)
+  </code></pre>
+  <p>这里使用的是：</p>
+  <pre><code class="language-python">json.dump(record, file, ensure_ascii=False, indent=2)
+  </code></pre>
+  <p>意思是：把 Python 对象 <code>record</code> 直接写入 JSON 文件。</p>
+  <hr />
+  <h3>3.2 从 JSON 文件读取 Python 对象</h3>
+  <pre><code class="language-python">import json
+
+  with open(&quot;record.json&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file:
+      record = json.load(file)
+
+  print(record[&quot;stage&quot;])
+  </code></pre>
+  <p>这里使用的是：</p>
+  <pre><code class="language-python">json.load(file)
+  </code></pre>
+  <p>意思是：从 JSON 文件读取内容，并解析成 Python 对象。</p>
+  <hr />
+  <h2>4. dumps / loads / dump / load 对比</h2>
+  <table>
+  <thead>
+  <tr>
+  <th>方法</th>
+  <th>作用</th>
+  <th>操作对象</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>json.dumps()</code></td>
+  <td>Python 对象转 JSON 字符串</td>
+  <td>字符串</td>
+  </tr>
+  <tr>
+  <td><code>json.loads()</code></td>
+  <td>JSON 字符串转 Python 对象</td>
+  <td>字符串</td>
+  </tr>
+  <tr>
+  <td><code>json.dump()</code></td>
+  <td>Python 对象写入 JSON 文件</td>
+  <td>文件</td>
+  </tr>
+  <tr>
+  <td><code>json.load()</code></td>
+  <td>JSON 文件读取成 Python 对象</td>
+  <td>文件</td>
+  </tr>
+  </tbody>
+  </table>
+  <p>示例：</p>
+  <pre><code class="language-python">import json
+
+  user = {&quot;name&quot;: &quot;Kai&quot;}
+
+  # Python 对象 -&gt; JSON 字符串
+  json_text = json.dumps(user, ensure_ascii=False, indent=2)
+
+  # JSON 字符串 -&gt; Python 对象
+  parsed_user = json.loads(json_text)
+
+  # Python 对象 -&gt; JSON 文件
+  with open(&quot;user.json&quot;, &quot;w&quot;, encoding=&quot;utf-8&quot;) as file:
+      json.dump(user, file, ensure_ascii=False, indent=2)
+
+  # JSON 文件 -&gt; Python 对象
+  with open(&quot;user.json&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file:
+      loaded_user = json.load(file)
+  </code></pre>
+  <hr />
+  <h2>5. 路径处理：pathlib</h2>
+  <p>在 Python 中，推荐用 <code>pathlib</code> 处理路径。</p>
+  <pre><code class="language-python">from pathlib import Path
+
+  file_path = Path(&quot;record.json&quot;)
+
+  print(file_path.exists())
+  print(file_path.name)
+  print(file_path.suffix)
+  </code></pre>
+  <p>解释：</p>
+  <pre><code class="language-plaintext">exists()   判断路径是否存在
+  name       文件名
+  suffix     文件后缀
+  </code></pre>
+  <hr />
+  <h3>5.1 创建文件夹</h3>
+  <pre><code class="language-python">from pathlib import Path
+
+  data_dir = Path(&quot;data&quot;)
+  data_dir.mkdir(exist_ok=True)
+  </code></pre>
+  <p>解释：</p>
+  <pre><code class="language-python">exist_ok=True
+  </code></pre>
+  <p>表示如果 <code>data</code> 文件夹已经存在，不要报错。</p>
+  <hr />
+  <h3>5.2 拼接路径</h3>
+  <pre><code class="language-python">from pathlib import Path
+
+  data_dir = Path(&quot;data&quot;)
+  file_path = data_dir / &quot;record.json&quot;
+
+  print(file_path)
+  </code></pre>
+  <p>推荐这样写：</p>
+  <pre><code class="language-python">data_dir / &quot;record.json&quot;
+  </code></pre>
+  <p>不要优先手写：</p>
+  <pre><code class="language-python">&quot;data/record.json&quot;
+  </code></pre>
+  <p>因为不同操作系统的路径分隔符可能不同，用 <code>Path</code> 更安全。</p>
+  <hr />
+  <h2>6. 异常处理</h2>
+  <p>真实程序里，经常会出现错误：</p>
+  <ul>
+  <li>文件不存在；</li>
+  <li>JSON 格式错误；</li>
+  <li>API 请求失败；</li>
+  <li>环境变量不存在；</li>
+  <li>用户传入参数错误。</li>
+  </ul>
+  <p>Python 用 <code>try...except</code> 处理错误。</p>
+  <hr />
+  <h3>6.1 文件不存在</h3>
+  <pre><code class="language-python">try:
+      with open(&quot;not_exists.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file:
+          content = file.read()
+
+      print(content)
+
+  except FileNotFoundError:
+      print(&quot;文件不存在，请检查文件路径。&quot;)
+  </code></pre>
+  <p>如果文件不存在，程序不会直接崩溃，而是进入 <code>except FileNotFoundError</code>。</p>
+  <hr />
+  <h3>6.2 数字转换失败</h3>
+  <pre><code class="language-python">try:
+      number = int(&quot;abc&quot;)
+      print(number)
+
+  except ValueError:
+      print(&quot;转换数字失败。&quot;)
+  </code></pre>
+  <hr />
+  <h3>6.3 捕获通用错误</h3>
+  <pre><code class="language-python">try:
+      result = 10 / 0
+      print(result)
+
+  except Exception as error:
+      print(&quot;程序出错了：&quot;, error)
+  </code></pre>
+  <p><code>Exception</code> 可以捕获大多数错误。</p>
+  <p>但以后写项目时，优先捕获具体错误类型，例如：</p>
+  <pre><code class="language-python">FileNotFoundError
+  ValueError
+  KeyError
+  </code></pre>
+  <hr />
+  <h2>7. 函数模块化</h2>
+  <p>不要把所有代码都堆在一起。真实项目里要拆成函数。</p>
+  <h3>7.1 保存函数</h3>
+  <pre><code class="language-python">import json
+
+
+  def save_record(record, file_path):
+      with open(file_path, &quot;w&quot;, encoding=&quot;utf-8&quot;) as file:
+          json.dump(record, file, ensure_ascii=False, indent=2)
+  </code></pre>
+  <hr />
+  <h3>7.2 读取函数</h3>
+  <pre><code class="language-python">import json
+
+
+  def load_record(file_path):
+      with open(file_path, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file:
+          return json.load(file)
+  </code></pre>
+  <hr />
+  <h3>7.3 主流程函数</h3>
+  <pre><code class="language-python">def main():
+      record = {
+          &quot;name&quot;: &quot;Kai&quot;,
+          &quot;stage&quot;: &quot;Python 阶段 2&quot;
+      }
+
+      save_record(record, &quot;record.json&quot;)
+      loaded_record = load_record(&quot;record.json&quot;)
+      print(loaded_record[&quot;stage&quot;])
+
+
+  main()
+  </code></pre>
+  <p>为什么要拆函数？</p>
+  <pre><code class="language-plaintext">逻辑更清晰
+  可以复用
+  方便测试
+  以后可以封装成 Agent 工具
+  </code></pre>
+  <hr />
+  <h2>8. HTTP 请求基础</h2>
+  <p>Agent 应用经常需要调用 API，比如：</p>
+  <ul>
+  <li>模型 API；</li>
+  <li>搜索 API；</li>
+  <li>天气 API；</li>
+  <li>数据库接口；</li>
+  <li>企业内部接口。</li>
+  </ul>
+  <p>Python 常用 <code>requests</code> 发送 HTTP 请求。</p>
+  <p>安装：</p>
+  <pre><code class="language-bash">pip install requests
+  </code></pre>
+  <hr />
+  <h3>8.1 GET 请求</h3>
+  <pre><code class="language-python">import requests
+
+  response = requests.get(&quot;https://api.github.com&quot;)
+
+  print(response.status_code)
+  print(response.json())
+  </code></pre>
+  <p>解释：</p>
+  <pre><code class="language-plaintext">requests.get()       发送 GET 请求
+  response.status_code HTTP 状态码
+  response.json()      把返回的 JSON 解析成 Python 对象
+  </code></pre>
+  <hr />
+  <h3>8.2 带参数的 GET 请求</h3>
+  <pre><code class="language-python">import requests
+
+  params = {
+      &quot;q&quot;: &quot;python agent development&quot;
+  }
+
+  response = requests.get(
+      &quot;https://api.github.com/search/repositories&quot;,
+      params=params
+  )
+
+  data = response.json()
+
+  print(data[&quot;total_count&quot;])
+  </code></pre>
+  <p>类似前端：</p>
+  <pre><code class="language-js">fetch(&quot;/api/search?q=python&quot;)
+  </code></pre>
+  <hr />
+  <h3>8.3 POST 请求</h3>
+  <pre><code class="language-python">import requests
+
+  payload = {
+      &quot;name&quot;: &quot;Kai&quot;,
+      &quot;stage&quot;: &quot;Python&quot;
+  }
+
+  response = requests.post(&quot;https://httpbin.org/post&quot;, json=payload)
+
+  print(response.status_code)
+  print(response.json())
+  </code></pre>
+  <p>这里：</p>
+  <pre><code class="language-python">json=payload
+  </code></pre>
+  <p>表示把 Python dict 作为 JSON 请求体发送。</p>
+  <p>类似前端：</p>
+  <pre><code class="language-js">fetch(url, {
+    method: &quot;POST&quot;,
+    headers: {
+      &quot;Content-Type&quot;: &quot;application/json&quot;
+    },
+    body: JSON.stringify(payload)
+  })
+  </code></pre>
+  <hr />
+  <h2>9. 环境变量</h2>
+  <p>Agent 应用经常需要 API Key，例如：</p>
+  <pre><code class="language-plaintext">ANTHROPIC_API_KEY
+  OPENAI_API_KEY
+  SEARCH_API_KEY
+  DATABASE_URL
+  </code></pre>
+  <p>这些不要直接写在代码里。</p>
+  <p>错误示例：</p>
+  <pre><code class="language-python">api_key = &quot;sk-xxxxxx&quot;
+  </code></pre>
+  <p>正确方式：</p>
+  <pre><code class="language-python">import os
+
+  api_key = os.getenv(&quot;ANTHROPIC_API_KEY&quot;)
+
+  if api_key is None:
+      print(&quot;缺少 ANTHROPIC_API_KEY 环境变量&quot;)
+  else:
+      print(&quot;已读取 API Key&quot;)
+  </code></pre>
+  <p>原因：</p>
+  <ul>
+  <li>避免泄露密钥；</li>
+  <li>不同环境可以使用不同配置；</li>
+  <li>代码可以安全提交到仓库。</li>
+  </ul>
+  <hr />
+  <h2>10. 命令行参数</h2>
+  <p>运行脚本时可以传参数：</p>
+  <pre><code class="language-bash">python app.py Kai
+  </code></pre>
+  <p>Python 读取参数：</p>
+  <pre><code class="language-python">import sys
+
+  name = sys.argv[1]
+
+  print(f&quot;你好，{name}&quot;)
+  </code></pre>
+  <p><code>sys.argv</code> 是一个列表：</p>
+  <pre><code class="language-plaintext">sys.argv[0]  脚本文件名，例如 app.py
+  sys.argv[1]  第一个参数，例如 Kai
+  </code></pre>
+  <p>更安全的写法：</p>
+  <pre><code class="language-python">import sys
+
+  if len(sys.argv) &lt; 2:
+      print(&quot;请传入你的名字&quot;)
+  else:
+      name = sys.argv[1]
+      print(f&quot;你好，{name}&quot;)
+  </code></pre>
+  <hr />
+  <h2>11. 完整示例：学习记录脚本</h2>
+  <pre><code class="language-python">import json
+  from pathlib import Path
+
+
+  def save_record(record, file_path):
+      with open(file_path, &quot;w&quot;, encoding=&quot;utf-8&quot;) as file:
+          json.dump(record, file, ensure_ascii=False, indent=2)
+
+
+  def load_record(file_path):
+      with open(file_path, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file:
+          return json.load(file)
+
+
+  def main():
+      data_dir = Path(&quot;data&quot;)
+      data_dir.mkdir(exist_ok=True)
+
+      file_path = data_dir / &quot;learning_record.json&quot;
+
+      record = {
+          &quot;name&quot;: &quot;Kai&quot;,
+          &quot;role&quot;: &quot;frontend developer&quot;,
+          &quot;target&quot;: &quot;Agent developer&quot;,
+          &quot;stage&quot;: &quot;Python 阶段 2&quot;,
+          &quot;completed&quot;: False,
+          &quot;topics&quot;: [&quot;文件读写&quot;, &quot;JSON 文件&quot;, &quot;异常处理&quot;, &quot;路径处理&quot;]
+      }
+
+      save_record(record, file_path)
+
+      loaded_record = load_record(file_path)
+
+      print(&quot;学习记录已保存&quot;)
+      print(loaded_record[&quot;stage&quot;])
+
+
+  main()
+  </code></pre>
+  <p>你要理解：</p>
+  <pre><code class="language-plaintext">save_record() 负责保存 JSON 文件
+  load_record() 负责读取 JSON 文件
+  main() 负责组织主流程
+  Path(&quot;data&quot;) 表示 data 文件夹
+  data_dir.mkdir(exist_ok=True) 创建文件夹
+  file_path = data_dir / &quot;learning_record.json&quot; 拼接路径
+  </code></pre>
+  <hr />
+  <h2>12. Agent 应用中的对应关系</h2>
+  <table>
+  <thead>
+  <tr>
+  <th>Python 能力</th>
+  <th>Agent 应用中的作用</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td>文件读写</td>
+  <td>读取用户上传文件、保存模型结果</td>
+  </tr>
+  <tr>
+  <td>JSON 文件</td>
+  <td>保存任务状态、学习记录、工具结果</td>
+  </tr>
+  <tr>
+  <td>pathlib</td>
+  <td>管理项目文件路径</td>
+  </tr>
+  <tr>
+  <td>try/except</td>
+  <td>处理文件不存在、API 失败、模型返回异常</td>
+  </tr>
+  <tr>
+  <td>requests</td>
+  <td>调用外部 API 或模型 API</td>
+  </tr>
+  <tr>
+  <td>os.getenv</td>
+  <td>安全读取 API Key</td>
+  </tr>
+  <tr>
+  <td>函数封装</td>
+  <td>封装 Agent 工具</td>
+  </tr>
+  <tr>
+  <td>命令行参数</td>
+  <td>写可执行脚本和工具</td>
+  </tr>
+  </tbody>
+  </table>
+  <hr />
+  <h2>13. 阶段 2 自查清单</h2>
+  <p>学习完成后，你应该能回答：</p>
+  <ol>
+  <li><code>with open(..., "w")</code> 是什么意思？</li>
+  <li><code>"r"</code>、<code>"w"</code>、<code>"a"</code> 分别是什么模式？</li>
+  <li><code>json.dumps()</code> 和 <code>json.dump()</code> 的区别是什么？</li>
+  <li><code>json.loads()</code> 和 <code>json.load()</code> 的区别是什么？</li>
+  <li><code>Path("data")</code> 是做什么的？</li>
+  <li><code>mkdir(exist_ok=True)</code> 有什么用？</li>
+  <li>为什么 Agent 应用要处理异常？</li>
+  <li>为什么 API Key 不应该写死在代码里？</li>
+  <li><code>requests.get()</code> 和前端 <code>fetch()</code> 有什么相似点？</li>
+  <li>为什么要把代码拆成 <code>save_record()</code>、<code>load_record()</code>、<code>main()</code>？</li>
+  </ol>
+  <hr />
+  <h2>14. 阶段 2 练习</h2>
+  <p>请你学习后完成下面练习。</p>
+  <p>要求：</p>
+  <ol>
+  <li>导入 <code>json</code></li>
+  <li>导入 <code>Path</code></li>
+  <li>创建 <code>data</code> 文件夹</li>
+  <li>创建一个学习记录字典 <code>learning_record</code></li>
+  <li>字典里包含：
+     - <code>name</code>
+     - <code>role</code>
+     - <code>target</code>
+     - <code>stage</code>
+     - <code>completed</code>
+     - <code>topics</code></li>
+  <li>把它保存到：</li>
+  </ol>
+  <pre><code class="language-plaintext">data/stage_02_record.json
+  </code></pre>
+  <ol start="7">
+  <li>再从这个 JSON 文件读取回来</li>
+  <li>打印：</li>
+  </ol>
+  <pre><code class="language-plaintext">当前阶段：Python 阶段 2
+  学习目标：Agent developer
+  </code></pre>
+  <p>参考结构：</p>
+  <pre><code class="language-python">import json
+  from pathlib import Path
+
+
+  def save_record(record, file_path):
+      ...
+
+
+  def load_record(file_path):
+      ...
+
+
+  def main():
+      ...
+
+
+  main()
+  </code></pre>
+  <hr />
+  <h2>15. 学完后告诉我</h2>
+  <p>学习完成后，直接回复：</p>
+  <pre><code class="language-plaintext">我学习完了
+  </code></pre>
+  <p>然后我会给你出阶段 2 测试题，并根据你的答案判断是否进入：</p>
+  <pre><code class="language-plaintext">阶段 3：Python 面向对象与异步基础
+  </code></pre>
+  <footer>本页由 <code>python-stage-02-scripting.md</code> 转换生成 · 文档阅读风格（参考 ChatGPT 页面）</footer>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("main pre").forEach(function (pre) {
+      var code = pre.querySelector("code");
+      if (!code) return;
+      var match = code.className.match(/language-([\w-]+)/);
+      var lang = match ? match[1] : "text";
+      var label = lang === "plaintext" ? "text" : lang;
+      var wrapper = document.createElement("div");
+      wrapper.className = "code-block";
+      pre.parentNode.insertBefore(wrapper, pre);
+      var header = document.createElement("div");
+      header.className = "code-header";
+      var langSpan = document.createElement("span");
+      langSpan.className = "code-lang";
+      langSpan.textContent = label;
+      var btn = document.createElement("button");
+      btn.className = "copy-btn";
+      btn.type = "button";
+      btn.textContent = "复制";
+      btn.addEventListener("click", function () {
+        navigator.clipboard.writeText(code.innerText).then(function () {
+          btn.textContent = "已复制";
+          setTimeout(function () { btn.textContent = "复制"; }, 1500);
+        }).catch(function () {
+          btn.textContent = "复制失败";
+          setTimeout(function () { btn.textContent = "复制"; }, 1500);
+        });
+      });
+      header.appendChild(langSpan);
+      header.appendChild(btn);
+      wrapper.appendChild(header);
+      wrapper.appendChild(pre);
+    });
+    if (window.hljs) {
+      document.querySelectorAll("pre code").forEach(function (block) {
+        try { hljs.highlightElement(block); } catch (e) {}
+      });
+    }
+  });
+</script>
+</body>
+</html>
