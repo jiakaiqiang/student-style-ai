@@ -1,0 +1,9 @@
+{
+  "hooks": {
+    "stage-passed": {
+      "description": "章节通过后自动提交并推送代码到远端",
+      "command": "git add -A && git commit -m 'chore(learning): stage ${STAGE_NAME} passed - auto commit' && git push",
+      "trigger": "manual"
+    }
+  }
+}
