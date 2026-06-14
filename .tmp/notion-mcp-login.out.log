@@ -1,0 +1,4 @@
+Authorize `notion` by opening this URL in your browser:
+https://mcp.notion.com/authorize?response_type=code&client_id=60vAZz9juDroxFiQ&state=KbYW3QRJWHCRVqEVuQYG9g&code_challenge=cFnjOfJoNaR3EZB3u4sOzPJkUTfa7q8Wr2ZP69iXLT0&code_challenge_method=S256&redirect_uri=http%3A%2F%2F127.0.0.1%3A59260%2Fcallback%2FHL0YvxgYx4DJ
+
+Successfully logged in to MCP server 'notion'.
