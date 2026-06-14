@@ -150,36 +150,47 @@ main()
 
 ---
 
-## 7. 当前阶段：阶段 3 — Python 面向对象与异步基础
+## 7. 阶段 3：Python 面向对象与异步基础
 
-当前应学习文件：
+状态：动手练习已完成并 review，待正式测试。
 
-```text
-python-stage-03-oop-async.md
-```
+已学习文件：
 
-阶段 3 学习重点：
+- `python-stage-03-oop-async.md`（学习文档）
+- `python-stage-03-practice/` 四个动手练习（2026-06-14）
 
-- `class`
-- `__init__`
-- `self`
-- 属性和方法
-- `dict` 和 `class` 的区别
-- `@dataclass`
-- 类型提示
-- `async def`
-- `await`
-- `asyncio.run()`
-- `asyncio.gather()`
-- 异步 Agent 的基础结构
+### 动手练习 review 结果（2026-06-14）
 
-学习者学完后会说：
+完成了四个练习：
 
-```text
-我学习完了
-```
+1. `exercise_01_class.py` — class / `__init__` / self / 方法 — ✅ 通过
+2. `exercise_02_dataclass.py` — @dataclass / 类型提示 — ❌ 有 bug
+3. `exercise_03_async.py` — async / await / gather / 并发 — ⚠️ 代码能跑，预测错一个
+4. `exercise_04_fix_bug.py` — 调试题 — ✅ 通过
 
-之后需要出阶段 3 测试题，并继续分析学习结果。
+**主要问题：**
+
+1. **前端习惯误用：**
+   - 练习 2 f-string 里用了 `${x}`（JS 模板字符串语法），应该是 `{x}`；
+   - dataclass 字段后面加了分号 `;`（Python 不需要）。
+
+2. **`asyncio.gather` 结果顺序误解：**
+   - 练习 3 预测结果会按「完成快慢」排序；
+   - 实际 `gather` 返回的列表**永远按传入顺序**，不是完成顺序。
+
+3. **缩进问题：**
+   - 练习 3 函数体缩进了 8 个空格，应该是 4 个。
+
+4. **变量名覆盖内置名：**
+   - 练习 3 用了 `list` 作为变量名，覆盖了 Python 内置的 `list`。
+
+**掌握情况：**
+
+- `self`、`await`、协程对象、并发耗时计算等核心概念理解正确。
+- 能预测和修复异步代码的 bug（练习 4 全对）。
+- 注释显示对「为什么要 await」有清晰认知。
+
+下一步：用户被建议修正练习 2、3 的问题后，进入正式的阶段 3 测试题 `python-stage-03-assessment.md`。
 
 ---
 
