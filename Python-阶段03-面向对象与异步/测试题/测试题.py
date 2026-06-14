@@ -32,23 +32,22 @@ user.say_hello()
 """
 
 # 答：class 是做什么的？
-#
+# 定义了一个User类对象 对象中有两个属性 一个名称一个say_hello的方法
 
 # 答：__init__ 类似 JS 里的什么？
-#
+# 类似 JS 中的构造函数constructor
 
 # 答：self 类似 JS 里的什么？
-#
+# this
 
 # 答：self.name = name 这一行在做什么？
-#
-
+# 将传入的 name 参数赋值给实例的 name 属性
 
 # 2. 🔥 执行顺序题
 # 当 Python 执行到 user = User("Kai") 这一行时，背后发生了什么？
 # 请按你的理解，把「创建对象」到「say_hello 打印出来」之间发生的步骤大致写出来。
 #
-# 答：
+# 答：初始化了个对象将Kai传入给name属性, 然后调用了say_hello方法 打印出Hello, Kai
 #
 
 
@@ -63,7 +62,7 @@ record = LearningRecord("Kai", "Python 阶段 3")
 print(record.name)
 print(record.summary())
 """
-# 答：
+# 答：属性是类的数据 方法是类的行为或者功能 print(record.name)打印的是name属性, print(record.summary())调用的是summary方法
 #
 
 
